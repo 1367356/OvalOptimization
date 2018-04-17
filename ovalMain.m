@@ -13,7 +13,7 @@ MULTI=1.2;  %长轴/短轴
 element_sum=142;
 element_space=0.5*lamda;
 %-----遗传算法参数
-genetic_num=20;%遗传代数
+genetic_num=3;%遗传代数
 group_num=10;%种群数
 Population_Init=zeros(circle_num+1,group_num);
 %---------------------------------------------------------------------------------------
@@ -62,6 +62,12 @@ end
 % Bestallarray=Array;
 Tem_rsll
 rsll=min(Tem_rsll)
+
+
+%-----收敛图
+figure
+
+plot(Tem_rsll);
 
 %------------------------------------------------------------------------------------------
 % 
