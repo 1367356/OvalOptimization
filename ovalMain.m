@@ -13,8 +13,8 @@ MULTI=1.2;  %长轴/短轴
 element_sum=142;
 element_space=0.5*lamda;
 %-----遗传算法参数
-genetic_num=200;%遗传代数
-group_num=30;%种群数
+genetic_num=20;%遗传代数
+group_num=10;%种群数
 Population_Init=zeros(circle_num+1,group_num);
 %---------------------------------------------------------------------------------------
 basic_distance=element_space:element_space:circle_num*element_space;
@@ -31,7 +31,6 @@ for group_i=1:group_num    %初始化种群半径，总共初始化了10个种群半径，从这10个半
         end
     end
 end
-
 %------------------------------------------------------------------------------------------------
 Population_Init=sort(Population_Init);%%%%按列从小到大排列
 Population_InitA=Population_Init*MULTI;  %长轴种群
@@ -43,12 +42,10 @@ Array=[];
 optimal_path={};
 for genetic_i=1:genetic_num
     genetic_i
-%     allElementPointGroupNum={};
     Rsll_it=zeros(group_num,1);%每一代的各个个体峰值旁瓣电平存储空间
     for m=1:group_num
         [Array,allElementPoint]=ArrayGroup(Population_InitA,Population_InitB,circle_num,m,element_space,element_sum);
          Rsll_it(m)=ovalRSLLofCircle(Array);   %求阵列方向图以及峰值旁瓣电平
-%          allElementPointGroupNum{m}=allElementPoint;
     end
     min(Rsll_it)
     Tem_rsll(genetic_i)=min(Rsll_it);%找出最小峰值旁瓣电平
@@ -58,11 +55,9 @@ for genetic_i=1:genetic_num
      if genetic_i<genetic_num
          [Population_next]=nextgroup_bak(Population_InitB,Rsll_it,group_num,circle_num,L,element_space);
          Population_InitB=Population_next;%%%%按列从小到大排列
-         %Population_InitB=sort(Population_next);%%%%按列从小到大排列
          Population_InitA=Population_InitB*MULTI;
      end
      rsll=min(Tem_rsll);
-     %%%加进度条
 end
 
 sort(Tem_rsll)
@@ -75,7 +70,8 @@ sort(Tem_rsll)
 % [aftersort_Rsll_it,Index]=sort(Tem_rsll);
 %global_optimal_path=optimal_path{Index(1)}
 %-----导出最优阵列
-m=Index_Rsll(1)
+n=Index_Rsll(1)
+m=1;
 [Array,allElementPoint]=ArrayGroup(Population_InitA,Population_InitB,circle_num,m,element_space,element_sum);  %Array是阵列中所有阵元组成的极坐标值。
 
 Bestallarray=Array;
@@ -119,7 +115,6 @@ m=ceil(find(ff==max(max(ff)))/N_sam);%在一个100*100的矩阵中找到最大值的位置
 fai0=ff(m,:); fai90=ff(:,m);  
 
 %-----uv图
-
 figure
 plot(u,fai0,'-b');
 hold on
@@ -132,8 +127,8 @@ set(get(gca,'XLabel'),'FontSize',figure_FontSize);
 set(get(gca,'YLabel'),'FontSize',figure_FontSize);
 set(findobj('FontSize',10),'FontSize',figure_FontSize);
 set(findobj(get(gca,'Children'),'LineWidth',0.5),'LineWidth',2);
-xlabel('x轴名');
-ylabel('y轴名');
+xlabel('u,v');
+ylabel('Radiation pattern (dB)');
 %-----方向图
 figure
 mesh(X,Y,ff);%画出曲面图
@@ -143,21 +138,22 @@ colormap(gray);
 %-----导出最优阵列
 % [Array]=ArrayGroup(Population_Init,circle_num,1,element_space);
 % Bestallarray=Array;
-xlabel('x轴名');
-ylabel('y轴名');
+xlabel('u=sin\theta cosφ');
+ylabel('u=sin\theta sinφ');
+ylabel('Radiation pattern(dB)');
 
 %-----收敛图
 figure
 plot(Tem_rsll);
 %阵元分布图
 allElementPoint
-xlabel('x轴名');
-ylabel('y轴名');
+xlabel('x(\lamda)');
+ylabel('y(\lamda)');
 
 figure
 plot(allElementPoint{1},allElementPoint{2},'*');
-xlabel('x轴名');
-ylabel('y轴名');
+xlabel('generation');
+ylabel('PSLL(dB)');
 %------------------------------------------------------------------------------------------
 % 
 % for i=1:length(data) %长轴
