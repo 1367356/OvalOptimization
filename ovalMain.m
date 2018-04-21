@@ -53,9 +53,7 @@ for genetic_i=1:genetic_num
     min(Rsll_it)
     Tem_rsll(genetic_i)=min(Rsll_it);%找出最小峰值旁瓣电平
     [aftersort_Rsll_it,Index]=sort(Rsll_it);
-    optimal_path{genetic_i}=Population_InitB(:,Index(1))';
-%     allElementPointgeni=allElementPointGroupNum{Index(1)}   %数组
-%     allElementPointGenetici{genetic_i}=allElementPointgeni;
+%     optimal_path{genetic_i}=Population_InitB(:,Index(1))';
      %----生成下一代种群的随机数
      if genetic_i<genetic_num
          [Population_next]=nextgroup_bak(Population_InitB,Rsll_it,group_num,circle_num,L,element_space);
@@ -68,9 +66,9 @@ for genetic_i=1:genetic_num
 end
 
 sort(Tem_rsll)
-[aftersort_Rsll_it,Index]=sort(Tem_rsll);
+% [aftersort_Rsll_it,Index]=sort(Tem_rsll);
 [aftersort_Rsll_it,Index_Rsll]=sort(Rsll_it);
-global_optimal_path=optimal_path{Index(1)};
+% global_optimal_path=optimal_path{Index(1)};
 % allElementPointGenetici{Index(1)}  %最优阵元位置
 
 % sort(Tem_rsll);
