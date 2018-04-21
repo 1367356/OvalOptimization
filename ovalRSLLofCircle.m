@@ -12,7 +12,6 @@ u=-1:2/N_sam:1-2/N_sam;%u=sin(sita)*cos(fai)，U轴
 v=-1:2/N_sam:1-2/N_sam;%v=sin(sita)*sin(fai)，V轴
 FF=zeros(N_sam,N_sam);%采样矩阵
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%计算方向图函数%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 fun_x=find(quartered_matrix~=0);     
 %得到的结果为一列向量，有阵元的位置索引值，维数一般比quartered_matrix低，就是把
