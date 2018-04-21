@@ -13,8 +13,8 @@ MULTI=1.2;  %长轴/短轴
 element_sum=142;
 element_space=0.5*lamda;
 %-----遗传算法参数
-genetic_num=5;%遗传代数
-group_num=10;%种群数
+genetic_num=200;%遗传代数
+group_num=30;%种群数
 Population_Init=zeros(circle_num+1,group_num);
 %---------------------------------------------------------------------------------------
 basic_distance=element_space:element_space:circle_num*element_space;
@@ -132,6 +132,8 @@ set(get(gca,'XLabel'),'FontSize',figure_FontSize);
 set(get(gca,'YLabel'),'FontSize',figure_FontSize);
 set(findobj('FontSize',10),'FontSize',figure_FontSize);
 set(findobj(get(gca,'Children'),'LineWidth',0.5),'LineWidth',2);
+xlabel('x轴名');
+ylabel('y轴名');
 %-----方向图
 figure
 mesh(X,Y,ff);%画出曲面图
@@ -141,16 +143,21 @@ colormap(gray);
 %-----导出最优阵列
 % [Array]=ArrayGroup(Population_Init,circle_num,1,element_space);
 % Bestallarray=Array;
-
+xlabel('x轴名');
+ylabel('y轴名');
 
 %-----收敛图
 figure
 plot(Tem_rsll);
 %阵元分布图
 allElementPoint
+xlabel('x轴名');
+ylabel('y轴名');
+
 figure
 plot(allElementPoint{1},allElementPoint{2},'*');
-
+xlabel('x轴名');
+ylabel('y轴名');
 %------------------------------------------------------------------------------------------
 % 
 % for i=1:length(data) %长轴
