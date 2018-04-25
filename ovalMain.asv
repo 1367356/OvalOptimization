@@ -10,10 +10,10 @@ circle_num=6;
 H=circle_num;
 L=9.4;
 MULTI=1.2;  %长轴/短轴
-element_sum=120;
+element_sum=140;
 element_space=0.4*lamda;
 %-----遗传算法参数
-genetic_num=3;%遗传代数
+genetic_num=2;%遗传代数
 group_num=10;%种群数
 Population_Init=zeros(circle_num+1,group_num);
 %---------------------------------------------------------------------------------------
@@ -151,10 +151,10 @@ ylabel('PSLL(dB)');
 
 %阵元分布图
 figure
-plot(allElementPoint{1},allElementPoint{2},'bo');
+plot(allElementPoint{1},allElementPoint{2},'○');
 xlabel('x(λ)');
 ylabel('y(λ)');
-%title('XLamda YLamda title');
+title('XLatitle');
 
 %------------------------------------------------------------------------------------------
 % 
