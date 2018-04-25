@@ -37,7 +37,7 @@ while(1<2)
     while (i<n)  %n点的个数
         m=sqrt( (x(i+1)-x(i))^2+(y(i+1)-y(i))^2);  %两点之间的距离,m突然一下变的很大，不在lamda范围内了
         sumlength=sumlength+m;
-        if((lamda-lamda*0.0001)<sumlength && sumlength<=(lamda+lamda*0.0001))  %点i在误差范围内时，保存
+        if((lamda-lamda*0.00001)<sumlength && sumlength<=(lamda+lamda*0.00001))  %点i在误差范围内时，保存
                k=k+1;
     %            v(k)=i;        
                sumlength=0;
