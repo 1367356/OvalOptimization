@@ -13,8 +13,8 @@ MULTI=1.2;  %长轴/短轴
 element_sum=120;
 element_space=0.4*lamda;
 %-----遗传算法参数
-genetic_num=3;%遗传代数
-group_num=10;%种群数
+genetic_num=200;%遗传代数  
+group_num=20;%种群数
 Population_Init=zeros(circle_num+1,group_num);
 %---------------------------------------------------------------------------------------
 basic_distance=element_space:element_space:circle_num*element_space;
@@ -31,6 +31,18 @@ for group_i=1:group_num    %初始化种群半径，总共初始化了10个种群半径，从这10个半
         end
     end
 end
+
+%  画一个半径均分满阵圆,计算结果，作为对比。
+% for group_i=1:group_num    %初始化种群半径，总共初始化了10个种群半径，从这10个半径组中，交叉变异，选择出最好的。
+%     for n=1:circle_num+1
+%         if n==1
+%             Population_Init(n,group_i)=0;
+%         else
+%             Population_Init(n,group_i)=(L/12)*(n-1); %R(1)=0
+%         end
+%     end
+% end
+
 %------------------------------------------------------------------------------------------------
 Population_Init=sort(Population_Init);%%%%按列从小到大排列
 Population_InitA=Population_Init*MULTI;  %长轴种群
@@ -73,6 +85,8 @@ sort(Tem_rsll)
 n=Index_Rsll(1)
 m=1;
 [Array,allElementPoint]=ArrayGroup(Population_InitA,Population_InitB,circle_num,m,element_space,element_sum);  %Array是阵列中所有阵元组成的极坐标值。
+
+Population_InitB(:,m)   %打印出最优圆环的半径
 
 Bestallarray=Array;
 
@@ -149,6 +163,8 @@ allElementPoint
 xlabel('generation');
 ylabel('PSLL(dB)');
 
+allElementPoint{1}(element_sum)=0;
+allElementPoint{2}(element_sum)=0;
 %阵元分布图
 figure
 plot(allElementPoint{1},allElementPoint{2},'bo');

@@ -1,0 +1,57 @@
+ans =
+
+  -15.5812
+
+
+n =
+
+     1
+
+
+num_of_element =
+
+    13
+
+
+num_of_element =
+
+    27
+
+
+num_of_element =
+
+    41
+
+
+num_of_element =
+
+    55
+
+
+num_of_element =
+
+    69
+
+
+num_of_element =
+
+    83
+
+
+
+ans =
+
+         0
+    0.7833
+    1.5667
+    2.3500
+    3.1333
+    3.9167
+    4.7000
+
+
+allElementPoint =
+
+  1¡Á2 cell Êý×é
+
+    [1¡Á285 double]    [1¡Á285 double]

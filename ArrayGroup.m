@@ -23,7 +23,6 @@ c =      0.5607  ;%(0.4597, 0.6618)
 
 for circle_i=2:circle_num
          p=save_rate_of_radius(data(i,2),a,b,c);
-%          Circle_element_num(circle_i)=fix(Perimeter(circle_i)/(element_space*(1+circle_i*0.2)));  %每个圆环放置的个数
            Circle_element_num(circle_i)=fix(p*(Perimeter(circle_i)/(element_space)));  %每个圆环放置的个数
 end
 Circle_element_num(circle_num+1)=element_sum-sum(Circle_element_num(1:circle_num));  %不能为负值，如果为负值，下面将会出现数组角标越界。
