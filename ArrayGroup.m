@@ -40,8 +40,9 @@ for i=2:circle_num+1 %长轴,中心一点没算
     [position,elementPointX,elementPointY] = array_calculate_bak(a,b,num_of_element);  %给定长短轴a,b的值和椭圆上阵元的个数，求出椭圆中阵元的极坐标和直角坐标的位置
     
     for index=1:length(position)
-        allPosition(len+index,1)=position(index,1);
-        allPosition(len+index,2)=position(index,2);
+%         allPosition(len+index,1)=position(index,1);
+%         allPosition(len+index,2)=position(index,2);
+        allPosition(len+index,1)=position(index,1)+j*position(index,2);
         allElementPointX(len+index)=elementPointX(index);
         allElementPointY(len+index)=elementPointY(index);
     end

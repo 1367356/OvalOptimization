@@ -16,9 +16,9 @@ FF=zeros(N_sam,N_sam);%采样矩阵
 fun_x=find(quartered_matrix~=0);     
 %得到的结果为一列向量，有阵元的位置索引值，维数一般比quartered_matrix低，就是把
 %没有阵元的位置去掉
-%q_position=[real(quartered_matrix(fun_x)) imag((quartered_matrix(fun_x)))]; 
+q_position=[real(quartered_matrix(fun_x)) imag((quartered_matrix(fun_x)))]; 
 %得到的结果为二维列向量，第一列幅值，第二列相位，行数和fun_x一样  
-q_position=quartered_matrix;
+% q_position=quartered_matrix;
 length(q_position);
 %-----下面这段代码就是方向图的计算 公式（2）和（3）只是转换为在直角坐标下面计算
 for n=1:N_sam

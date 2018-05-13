@@ -11,10 +11,10 @@ H=circle_num;
 L=9.4;
 MULTI=1.2;  %长轴/短轴
 element_sum=120;
-element_space=0.4*lamda;
+element_space=0.5*lamda;
 %-----遗传算法参数
 genetic_num=200;%遗传代数  
-group_num=20;%种群数
+group_num=30;%种群数
 Population_Init=zeros(circle_num+1,group_num);
 %---------------------------------------------------------------------------------------
 basic_distance=element_space:element_space:circle_num*element_space;
@@ -85,16 +85,16 @@ sort(Tem_rsll)
 n=Index_Rsll(1)
 m=1;
 [Array,allElementPoint]=ArrayGroup(Population_InitA,Population_InitB,circle_num,m,element_space,element_sum);  %Array是阵列中所有阵元组成的极坐标值。
-
+ovalRSLLofCircle(Array)   %求阵列方向图以及峰值旁瓣电平
 Population_InitB(:,m)   %打印出最优圆环的半径
 
 Bestallarray=Array;
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%优化结果展示%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-----导出方向图
-N_sam=1024;  %采样点数
-u=-1:2/N_sam:1-2/N_sam;  %u=sin(sita)*cos(fai)，U轴
-v=-1:2/N_sam:1-2/N_sam;  %v=sin(sita)*sin(fai)，V轴
+N_sam=1024;  %采样点数  ，在ovalRSLLofCircle中是100
+u=-1*MULTI:(2/N_sam)*MULTI:(1-2/N_sam)*MULTI;  %u=sin(sita)*cos(fai)，U轴
+v=-1:(2/N_sam):1-2/N_sam;  %v=sin(sita)*sin(fai)，V轴
 [X,Y]=meshgrid(u,v);
 FF=zeros(N_sam,N_sam);%采样矩阵
 lamda=1;%波长
@@ -107,11 +107,10 @@ q_position=[real(Bestallarray(fun_x)) imag((Bestallarray(fun_x)))];
 %-----下面这段代码就是方向图的计算 公式（2）和（3）只是转换为在直角坐标下面计算
 for n=1:N_sam
     for m=1:N_sam
-        if abs(v(m))<=sqrt(1-u(n)^2)% 数学推导合理性保证，限定在单位圆内部
+        if abs(v(m))<=sqrt(1-(u(n))^2)% 数学推导合理性保证，限定在单位圆内部
            temp=0;
            for a=1:length(fun_x)%把所有阵元的用上的，所以应该是整个圆平面  
-               temp=temp+exp(j*2*pi*q_position(a,1)*(cos(q_position(a,2))...
-                       *u(n)+sin(q_position(a,2))*v(m)));
+               temp=temp+exp(j*2*pi*q_position(a,1)*(cos(q_position(a,2))*u(n)+sin(q_position(a,2))*v(m)));  %q_position(a,1)=半径，q_position(a,2)=角度0-2pi
            end
            FF(n,m)=temp+1;%加上圆心        
        else 
@@ -152,8 +151,8 @@ colormap(gray);
 %-----导出最优阵列
 % [Array]=ArrayGroup(Population_Init,circle_num,1,element_space);
 % Bestallarray=Array;
-xlabel('u=sin\theta cos φ');
-ylabel('u=sin\theta sin φ');
+ylabel('u=sin\theta cos φ');
+xlabel('v=sin\theta sin φ');
 zlabel('Radiation pattern(dB)');
 
 %-----收敛图
